@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Plan less. Go outside more. TouchGrass turns outdoor time into a simple mission."
+    />
+    <title>TouchGrass — Plan less. Go outside more.</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <script src="/static/app.js" defer></script>
+  </head>
+  <body>
+    <main class="page">
+      <header class="site-header">
+        <a class="wordmark" href="/" aria-label="TouchGrass home">
+          <span class="wordmark-icon" aria-hidden="true">✳</span>
+          TouchGrass
+        </a>
+        <span class="header-note">A little more outside</span>
+      </header>
+
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">Make room for the real world</p>
+        <h1 id="page-title">Plan less.<br /><span>Go outside more.</span></h1>
+        <p class="intro-copy">
+          Turn the time you have into a simple outdoor mission. Check the plan
+          once, then let the day take over.
+        </p>
+      </section>
+
+      <section class="planner" aria-labelledby="planner-title">
+        <div class="planner-heading">
+          <div>
+            <p class="eyebrow">Your next little adventure</p>
+            <h2 id="planner-title">What feels doable?</h2>
+          </div>
+          <span class="step-label">01 <span>/ PLAN</span></span>
+        </div>
+
+        <form id="mission-form">
+          <label class="field">
+            <span>How much time do you have?</span>
+            <select name="available_time_minutes" required>
+              <option value="">Choose a time</option>
+              <option value="15">15 minutes</option>
+              <option value="30">30 minutes</option>
+              <option value="45">45 minutes</option>
+              <option value="60">60 minutes</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>What would you like to do?</span>
+            <select name="preferred_activity" required>
+              <option value="">Choose an activity</option>
+              <option value="walking">Walking</option>
+              <option value="nature observation">Nature observation</option>
+              <option value="relaxing outdoors">Relaxing outdoors</option>
+              <option value="gentle movement">Gentle movement</option>
+              <option value="exploring">Exploring</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>What is your energy like?</span>
+            <select name="energy_level" required>
+              <option value="">Choose your energy</option>
+              <option value="low">Low — keep it gentle</option>
+              <option value="moderate">Moderate</option>
+              <option value="high">High — I'm up for more</option>
+            </select>
+          </label>
+
+          <div class="field">
+            <span>Where are you heading?</span>
+            <label class="sr-only" for="environment">Outdoor environment</label>
+            <select id="environment" name="environment" required>
+              <option value="">Choose a place</option>
+              <option value="park">Park</option>
+              <option value="neighborhood">Neighborhood</option>
+              <option value="backyard">Backyard</option>
+              <option value="garden">Garden</option>
+              <option value="other familiar outdoor space">Somewhere else</option>
+            </select>
+          </div>
+
+          <label class="field">
+            <span>What are you interested in? <span class="optional">(optional)</span></span>
+            <input name="interests" type="text" maxlength="200" placeholder="Nature, photography, quiet..." />
+          </label>
+
+          <label class="field">
+            <span>Any limitations or preferences? <span class="optional">(optional)</span></span>
+            <input name="constraints" type="text" maxlength="200" placeholder="Avoid stairs, stay on flat paths..." />
+          </label>
+
+          <label class="toggle-field">
+            <input name="phone_free" type="checkbox" checked />
+            <span>Make it phone-free once I start</span>
+          </label>
+
+          <button class="submit-button" type="submit">
+            Generate my outdoor mission
+            <span aria-hidden="true">↗</span>
+          </button>
+          <p id="form-message" class="form-note" role="status" aria-live="polite"></p>
+        </form>
+
+        <section id="mission-result" class="mission-result" aria-live="polite" hidden>
+          <p class="eyebrow">Your outdoor mission</p>
+          <h2 id="mission-title"></h2>
+          <p id="mission-description" class="mission-description"></p>
+          <p id="mission-duration" class="duration-pill"></p>
+          <div id="preparation-section" class="result-section" hidden>
+            <h3>Before you go</h3>
+            <ul id="mission-preparation"></ul>
+          </div>
+          <div class="result-section">
+            <h3>Your steps</h3>
+            <ol id="mission-steps"></ol>
+          </div>
+          <div id="challenge-section" class="result-section" hidden>
+            <h3>Optional little challenge</h3>
+            <p id="mission-challenge"></p>
+          </div>
+          <div class="result-section safety-section">
+            <h3>A quick reminder</h3>
+            <ul id="mission-safety"></ul>
+            <p class="safety-disclaimer">Use your judgment and follow local rules and conditions.</p>
+          </div>
+          <p id="mission-completion" class="completion-message"></p>
+          <div class="result-actions">
+            <button id="phone-free-button" class="submit-button" type="button">
+              I'm heading out — phone-free mode
+              <span aria-hidden="true">↗</span>
+            </button>
+            <button id="edit-mission-button" class="text-button" type="button">Change my plan</button>
+          </div>
+        </section>
+
+        <section id="phone-free-view" class="phone-free-view" hidden>
+          <p class="eyebrow">Phone-free mode</p>
+          <h2 id="phone-free-title"></h2>
+          <p id="phone-free-duration" class="duration-pill"></p>
+          <div id="phone-free-preparation-section" class="result-section" hidden>
+            <h3>Before you go</h3>
+            <ul id="phone-free-preparation"></ul>
+          </div>
+          <ol id="phone-free-steps"></ol>
+          <p class="phone-free-reminder">You have what you need. Put your phone away and enjoy being outside.</p>
+          <button id="return-button" class="text-button" type="button">I'm back</button>
+        </section>
+      </section>
+
+      <footer class="site-footer">
+        <span>Made for the moments beyond your screen.</span>
+        <span>Take a breath. Find some green.</span>
+      </footer>
+    </main>
+  </body>
+</html>
